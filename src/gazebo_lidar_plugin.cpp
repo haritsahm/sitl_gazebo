@@ -63,6 +63,11 @@ void LidarPlugin::Load(sensors::SensorPtr _parent, sdf::ElementPtr _sdf)
   newLaserScansConnection_ = parentSensor_->LaserShape()->ConnectNewLaserScans(
       boost::bind(&LidarPlugin::OnNewLaserScans, this));
 
+  if (_sdf->HasElement("topicname"))
+    topicname_ = _sdf->GetElement("topicname")->Get<std::string>();
+  else
+    topicname_ = "lidar";
+
   if (_sdf->HasElement("robotNamespace"))
     namespace_ = _sdf->GetElement("robotNamespace")->Get<std::string>();
   else

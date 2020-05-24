@@ -71,6 +71,7 @@ namespace gazebo
       transport::NodePtr node_handle_;
       transport::PublisherPtr lidar_pub_;
       std::string namespace_;
+      std::string topicname_;
       double min_distance_;
       double max_distance_;
 

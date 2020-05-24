@@ -19,7 +19,7 @@ include(GNUInstallDirs)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 option(BUILD_GSTREAMER_PLUGIN "enable gstreamer plugin" ON)
-option(BUILD_ROS_INTERFACE "Enable building ROS dependent plugins" OFF)
+option(BUILD_ROS_INTERFACE "Enable building ROS dependent plugins" ON)
 
 option(SEND_VISION_ESTIMATION_DATA "Send Mavlink VISION_POSITION_ESTIMATE msgs" OFF)
 option(SEND_ODOMETRY_DATA "Send Mavlink ODOMETRY msgs" OFF)
@@ -363,6 +363,8 @@ target_link_libraries(gazebo_opticalflow_plugin ${OpticalFlow_LIBS})
 # If BUILD_ROS_INTERFACE set to ON, build plugins that have ROS dependencies
 # Current plugins that can be used with ROS interface: gazebo_motor_failure_plugin
 if (BUILD_ROS_INTERFACE)
+  message(STATUS "Build plugins")
+
   add_library(gazebo_motor_failure_plugin SHARED src/gazebo_motor_failure_plugin.cpp)
   target_link_libraries(gazebo_motor_failure_plugin ${GAZEBO_libraries} ${roscpp_LIBRARIES})
   list(APPEND plugins gazebo_motor_failure_plugin)
